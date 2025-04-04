@@ -1,0 +1,106 @@
+package com.songoda.ultimatekits.gui;
+
+import com.craftaro.core.compatibility.CompatibleMaterial;
+import com.craftaro.core.gui.Gui;
+import com.craftaro.core.gui.GuiUtils;
+import com.craftaro.core.utils.TextUtils;
+import com.craftaro.third_party.com.cryptomorin.xseries.XMaterial;
+import com.songoda.ultimatekits.UltimateKits;
+import com.songoda.ultimatekits.category.Category;
+import com.songoda.ultimatekits.kit.Kit;
+import com.songoda.ultimatekits.settings.Settings;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.LinkedHashSet;
+import java.util.Random;
+import java.util.Set;
+
+public class CategorySelectorGui extends Gui {
+    private int timer;
+    private static final Random rand = new Random();
+
+    public CategorySelectorGui(UltimateKits plugin, Player player) {
+        boolean glassless = Settings.DO_NOT_USE_GLASS_BORDERS.getBoolean();
+
+        Set<Category> categories = new LinkedHashSet<>();
+
+        for (Kit kit : plugin.getKitManager().getKits()) {
+            if (kit.hasPermissionToPreview(player) && kit.getCategory() != null) {
+                categories.add(kit.getCategory());
+            }
+        }
+
+        setTitle(plugin.getLocale().getMessage("interface.categoryselector.title").getMessage());
+
+        int showPerRow = glassless ? 9 : 7;
+        int nrows = (int) Math.ceil(categories.size() / (double) showPerRow);
+        setRows(glassless ? nrows : nrows + 2);
+
+        setItem(0, 4, GuiUtils.createButtonItem(XMaterial.BOOK,
+                plugin.getLocale().getMessage("interface.categoryselector.details")
+                        .processPlaceholder("player", player.getName()).toText().split("\\|")));
+
+        if (!glassless) {
+            setButton(this.rows - 1, 4, GuiUtils.createButtonItem(Settings.EXIT_ICON.getMaterial(XMaterial.OAK_DOOR),
+                            UltimateKits.getInstance().getLocale().getMessage("interface.button.exit").getMessage()),
+                    event -> exit());
+        }
+
+        ItemStack glass2 = GuiUtils.getBorderItem(Settings.GLASS_TYPE_2.getMaterial());
+        setDefaultItem(AIR);
+        mirrorFill(0, 0, true, true, glass2);
+
+        if (!glassless) {
+            if (Settings.RAINBOW.getBoolean()) {
+                animateGlass();
+                this.timer = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+                    if (this.inventory.getViewers().isEmpty()) {
+                        return;
+                    }
+                    animateGlass();
+                }, 20L, 20L);
+                setOnClose(event -> Bukkit.getScheduler().cancelTask(this.timer));
+            } else {
+                ItemStack glass1 = GuiUtils.getBorderItem(Settings.GLASS_TYPE_1.getMaterial());
+                ItemStack glass3 = GuiUtils.getBorderItem(Settings.GLASS_TYPE_3.getMaterial());
+                mirrorFill(0, 0, true, true, glass2);
+                mirrorFill(1, 0, true, true, glass2);
+                mirrorFill(0, 1, true, true, glass2);
+                mirrorFill(0, 2, true, true, glass3);
+                mirrorFill(0, 3, false, true, glass1);
+            }
+        }
+
+        int i = 10;
+        for (Category category : categories) {
+            setButton(i, GuiUtils.createButtonItem(XMaterial.matchXMaterial(category.getMaterial()),
+                            TextUtils.formatText(category.getName()),
+                            "",
+                            plugin.getLocale().getMessage("interface.categoryselector.view").toText()),
+                    event -> {
+                        this.guiManager.showGUI(player, new KitSelectorGui(plugin, player, category));
+                    });
+            i++;
+        }
+    }
+
+
+    private void animateGlass() {
+        for (int col = 1; col < 8; ++col) {
+            ItemStack it;
+            if ((it = getItem(0, col)) == null || it.getType() == Material.AIR || it.getType().name().contains("PANE")) {
+                setItem(0, col, GuiUtils.getBorderItem(CompatibleMaterial.getGlassPaneForColor(rand.nextInt(16))));
+            }
+            if ((it = getItem(this.rows - 1, col)) == null || it.getType() == Material.AIR || it.getType().name().contains("PANE")) {
+                setItem(this.rows - 1, col, GuiUtils.getBorderItem(CompatibleMaterial.getGlassPaneForColor(rand.nextInt(16))));
+            }
+        }
+        for (int row = 1; row + 1 < this.rows; ++row) {
+            setItem(row, 0, GuiUtils.getBorderItem(CompatibleMaterial.getGlassPaneForColor(rand.nextInt(16))));
+            setItem(row, 8, GuiUtils.getBorderItem(CompatibleMaterial.getGlassPaneForColor(rand.nextInt(16))));
+        }
+    }
+}

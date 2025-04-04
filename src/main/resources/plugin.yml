@@ -3,7 +3,7 @@ description: ${project.description}
 version: ${project.version}
 api-version: 1.13
 
-main: com.craftaro.ultimatekits.UltimateKits
+main: com.songoda.ultimatekits.UltimateKits
 softdepend:
   - CMI
   - DecentHolograms

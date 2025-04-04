@@ -1,0 +1,52 @@
+package com.songoda.ultimatekits.kit.type;
+
+import com.craftaro.core.chat.AdventureUtils;
+import com.songoda.ultimatekits.UltimateKits;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+
+public class KitContentCommand implements KitContent {
+    private final String command; // Stored like "eco give {player} 100"
+
+    public KitContentCommand(String command) {
+        this.command = command;
+    }
+
+    public String getCommand() {
+        return this.command;
+    }
+
+    @Override
+    public String getSerialized() {
+        return "/" + this.command;
+    }
+
+    @Override
+    public ItemStack getItemForDisplay() {
+        ItemStack displayItem = new ItemStack(Material.PAPER, 1);
+        AdventureUtils.formatItemName(displayItem, UltimateKits.getInstance().getLocale().getMessage("general.type.command").getMessage());
+
+        ArrayList<String> lore = new ArrayList<>();
+        int index = 0;
+        while (index < this.command.length()) {
+            lore.add(ChatColor.GREEN + (index == 0 ? "/" : "") + ChatColor.GREEN + this.command.substring(index, Math.min(index + 30, this.command.length())));
+            index += 30;
+        }
+        AdventureUtils.formatItemLore(displayItem, lore);
+
+        return displayItem;
+    }
+
+    @Override
+    public ItemStack process(Player player) {
+        String parsed = this.command;
+        parsed = parsed.replace("{player}", player.getName());
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), parsed);
+        return null;
+    }
+}

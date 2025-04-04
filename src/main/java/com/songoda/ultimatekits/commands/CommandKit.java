@@ -1,0 +1,135 @@
+package com.songoda.ultimatekits.commands;
+
+import com.craftaro.core.commands.AbstractCommand;
+import com.craftaro.core.gui.GuiManager;
+import com.songoda.ultimatekits.UltimateKits;
+import com.songoda.ultimatekits.gui.CategorySelectorGui;
+import com.songoda.ultimatekits.gui.KitSelectorGui;
+import com.songoda.ultimatekits.kit.Kit;
+import com.songoda.ultimatekits.kit.KitHandler;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CommandKit extends AbstractCommand {
+    private final UltimateKits plugin;
+    private final GuiManager guiManager;
+    private final KitHandler kitHandler;
+
+    public CommandKit(UltimateKits plugin, GuiManager guiManager, KitHandler kitHandler) {
+        super(CommandType.CONSOLE_OK, "kit");
+        this.plugin = plugin;
+        this.guiManager = guiManager;
+        this.kitHandler = kitHandler;
+    }
+
+    @Override
+    protected ReturnType runCommand(CommandSender sender, String... args) {
+        if (args.length > 2) {
+            return ReturnType.SYNTAX_ERROR;
+        }
+
+        if (args.length == 0 && sender instanceof Player) {
+            // /kit - Opens GUI.
+            if (this.plugin.getKitManager().getKits().stream().anyMatch(kit -> kit.getCategory() != null)) {
+                this.guiManager.showGUI((Player) sender, new CategorySelectorGui(this.plugin, (Player) sender));
+            } else {
+                this.guiManager.showGUI((Player) sender, new KitSelectorGui(this.plugin, (Player) sender, null));
+            }
+            return ReturnType.SUCCESS;
+        }
+
+        if (this.plugin.getKitManager().getKit(args[0]) == null) {
+            this.plugin.getLocale().getMessage("command.kit.kitdoesntexist").sendPrefixedMessage(sender);
+            return ReturnType.FAILURE;
+        }
+
+        Kit kit = this.plugin.getKitManager().getKit(args[0]);
+
+        if (args.length == 1) {
+            // /kit <kit> - Gives kit to self.
+            if (!(sender instanceof Player)) {
+                return ReturnType.NEEDS_PLAYER;
+            }
+
+            if (!kit.hasPermissionToClaim((Player) sender)) {
+                this.plugin.getLocale().getMessage("command.general.noperms").sendPrefixedMessage(sender);
+                return ReturnType.FAILURE;
+            }
+
+            kitHandler.processGenericUse(kit, (Player) sender, false);
+            return ReturnType.SUCCESS;
+        } else {
+            // /kit <kit> <player> - Gives kit to another player.
+
+            if (!sender.hasPermission("ultimatekits.admin")) {
+                this.plugin.getLocale().getMessage("command.general.noperms").sendPrefixedMessage(sender);
+                return ReturnType.FAILURE;
+            }
+
+            if (!args[1].equalsIgnoreCase("all") && Bukkit.getPlayer(args[1]) == null) {
+                this.plugin.getLocale().newMessage("&cThat username does not exist, or the user is offline!").sendPrefixedMessage(sender);
+                return ReturnType.FAILURE;
+            }
+
+            Player player = Bukkit.getPlayer(args[1]);
+            String who = player != null ? player.getName() : "everyone";
+
+            if (player != null) {
+                kitHandler.processGenericUse(kit, player, true);
+                plugin.getLocale().getMessage("event.claim.givesuccess")
+                        .processPlaceholder("kit", kit.getName())
+                        .sendPrefixedMessage(sender);
+            } else {
+                Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
+                    kitHandler.processGenericUse(kit, onlinePlayer, true);
+                    plugin.getLocale().getMessage("event.claim.givesuccess")
+                            .processPlaceholder("kit", kit.getName())
+                            .sendPrefixedMessage(sender);
+                });
+            }
+
+            this.plugin.getLocale().newMessage("&7You gave &9" + who + "&7 kit &9" + kit.getName() + "&7.")
+                    .sendPrefixedMessage(sender);
+            return ReturnType.SUCCESS;
+        }
+    }
+
+    @Override
+    protected List<String> onTab(CommandSender sender, String... args) {
+        List<String> tab = new ArrayList<>();
+
+        if (!(sender instanceof Player)) {
+            return tab;
+        }
+
+        if (args.length == 1) {
+            for (Kit kit : this.plugin.getKitManager().getKits()) {
+                tab.add(kit.getKey());
+            }
+        } else if (args.length == 2) {
+            tab.add("all");
+            Bukkit.getOnlinePlayers().forEach(player -> tab.add(player.getName()));
+        }
+
+        return tab;
+    }
+
+    @Override
+    public String getPermissionNode() {
+        return null;
+    }
+
+    @Override
+    public String getSyntax() {
+        return "/Kit & /Kits | /kit <kit_name> [player]";
+    }
+
+    @Override
+    public String getDescription() {
+        return "View all available kits.";
+    }
+}
