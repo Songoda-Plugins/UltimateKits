@@ -1,8 +1,8 @@
 package com.songoda.ultimatekits.commands;
 
-import com.craftaro.core.commands.AbstractCommand;
-import com.craftaro.core.utils.NumberUtils;
-import com.craftaro.core.utils.PlayerUtils;
+import com.songoda.core.commands.AbstractCommand;
+import com.songoda.core.utils.NumberUtils;
+import com.songoda.core.utils.PlayerUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.key.Key;
 import com.songoda.ultimatekits.kit.Kit;

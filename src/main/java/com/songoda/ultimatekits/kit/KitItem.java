@@ -1,6 +1,6 @@
 package com.songoda.ultimatekits.kit;
 
-import com.craftaro.core.third_party.de.tr7zw.nbtapi.NBTItem;
+import com.songoda.core.third_party.de.tr7zw.nbtapi.NBTItem;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.kit.type.KitContent;
 import com.songoda.ultimatekits.kit.type.KitContentCommand;

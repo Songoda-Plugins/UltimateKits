@@ -1,6 +1,6 @@
 package com.songoda.ultimatekits.handlers;
 
-import com.craftaro.core.compatibility.CompatibleParticleHandler;
+import com.songoda.core.compatibility.CompatibleParticleHandler;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.kit.KitBlockData;
 import com.songoda.ultimatekits.settings.Settings;

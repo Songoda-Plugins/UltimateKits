@@ -1,7 +1,7 @@
 package com.songoda.ultimatekits.kit;
 
-import com.craftaro.core.configuration.Config;
-import com.craftaro.core.utils.TextUtils;
+import com.songoda.core.configuration.Config;
+import com.songoda.core.utils.TextUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.category.Category;
 import com.songoda.ultimatekits.settings.Settings;

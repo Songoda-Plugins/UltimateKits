@@ -1,13 +1,13 @@
 package com.songoda.ultimatekits.kit;
 
-import com.craftaro.core.compatibility.CompatibleHand;
-import com.craftaro.core.gui.Gui;
-import com.craftaro.core.gui.GuiManager;
-import com.craftaro.core.hooks.EconomyManager;
-import com.craftaro.core.third_party.de.tr7zw.nbtapi.NBTItem;
-import com.craftaro.core.utils.ItemUtils;
-import com.craftaro.core.utils.TimeUtils;
-import com.craftaro.third_party.com.cryptomorin.xseries.XSound;
+import com.songoda.core.compatibility.CompatibleHand;
+import com.songoda.core.gui.Gui;
+import com.songoda.core.gui.GuiManager;
+import com.songoda.core.hooks.EconomyManager;
+import com.songoda.core.third_party.de.tr7zw.nbtapi.NBTItem;
+import com.songoda.core.utils.ItemUtils;
+import com.songoda.core.utils.TimeUtils;
+import com.songoda.third_party.com.cryptomorin.xseries.XSound;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.crate.Crate;
 import com.songoda.ultimatekits.gui.AnimatedKitGui;

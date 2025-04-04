@@ -1,8 +1,8 @@
 package com.songoda.ultimatekits.key;
 
-import com.craftaro.core.third_party.de.tr7zw.nbtapi.NBTItem;
-import com.craftaro.core.utils.ItemUtils;
-import com.craftaro.core.utils.TextUtils;
+import com.songoda.core.third_party.de.tr7zw.nbtapi.NBTItem;
+import com.songoda.core.utils.ItemUtils;
+import com.songoda.core.utils.TextUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.kit.Kit;
 import com.songoda.ultimatekits.settings.Settings;

@@ -1,7 +1,7 @@
 package com.songoda.ultimatekits.database.migrations;
 
-import com.craftaro.core.database.DataMigration;
-import com.craftaro.core.database.SQLiteConnector;
+import com.songoda.core.database.DataMigration;
+import com.songoda.core.database.SQLiteConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

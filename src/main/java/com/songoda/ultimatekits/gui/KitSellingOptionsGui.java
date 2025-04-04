@@ -1,11 +1,11 @@
 package com.songoda.ultimatekits.gui;
 
-import com.craftaro.core.gui.AnvilGui;
-import com.craftaro.core.gui.Gui;
-import com.craftaro.core.gui.GuiUtils;
-import com.craftaro.core.hooks.EconomyManager;
-import com.craftaro.core.utils.SkullItemCreator;
-import com.craftaro.third_party.com.cryptomorin.xseries.XMaterial;
+import com.songoda.core.gui.AnvilGui;
+import com.songoda.core.gui.Gui;
+import com.songoda.core.gui.GuiUtils;
+import com.songoda.core.hooks.EconomyManager;
+import com.songoda.core.utils.SkullItemCreator;
+import com.songoda.third_party.com.cryptomorin.xseries.XMaterial;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.kit.Kit;
 import com.songoda.ultimatekits.settings.Settings;

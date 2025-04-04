@@ -1,7 +1,7 @@
 package com.songoda.ultimatekits.commands;
 
-import com.craftaro.core.commands.AbstractCommand;
-import com.craftaro.core.gui.GuiManager;
+import com.songoda.core.commands.AbstractCommand;
+import com.songoda.core.gui.GuiManager;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.gui.BlockEditorGui;
 import com.songoda.ultimatekits.gui.KitEditorGui;

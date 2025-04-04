@@ -1,7 +1,7 @@
 package com.songoda.ultimatekits.commands;
 
-import com.craftaro.core.commands.AbstractCommand;
-import com.craftaro.core.utils.NumberUtils;
+import com.songoda.core.commands.AbstractCommand;
+import com.songoda.core.utils.NumberUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.crate.Crate;
 import com.songoda.ultimatekits.kit.Kit;

@@ -1,10 +1,10 @@
 package com.songoda.ultimatekits.listeners;
 
-import com.craftaro.core.compatibility.CompatibleHand;
-import com.craftaro.core.compatibility.ServerVersion;
-import com.craftaro.core.gui.GuiManager;
-import com.craftaro.core.utils.TimeUtils;
-import com.craftaro.third_party.com.cryptomorin.xseries.XMaterial;
+import com.songoda.core.compatibility.CompatibleHand;
+import com.songoda.core.compatibility.ServerVersion;
+import com.songoda.core.gui.GuiManager;
+import com.songoda.core.utils.TimeUtils;
+import com.songoda.third_party.com.cryptomorin.xseries.XMaterial;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.gui.BlockEditorGui;
 import com.songoda.ultimatekits.kit.Kit;

@@ -1,9 +1,9 @@
 package com.songoda.ultimatekits.utils;
 
-import com.craftaro.core.compatibility.CompatibleMaterial;
-import com.craftaro.core.gui.Gui;
-import com.craftaro.core.gui.GuiUtils;
-import com.craftaro.third_party.com.cryptomorin.xseries.XMaterial;
+import com.songoda.core.compatibility.CompatibleMaterial;
+import com.songoda.core.gui.Gui;
+import com.songoda.core.gui.GuiUtils;
+import com.songoda.third_party.com.cryptomorin.xseries.XMaterial;
 import com.songoda.ultimatekits.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

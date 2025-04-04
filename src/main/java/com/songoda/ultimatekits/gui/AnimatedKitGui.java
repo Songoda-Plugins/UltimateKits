@@ -1,11 +1,11 @@
 package com.songoda.ultimatekits.gui;
 
-import com.craftaro.core.compatibility.CompatibleMaterial;
-import com.craftaro.core.gui.Gui;
-import com.craftaro.core.gui.GuiUtils;
-import com.craftaro.third_party.com.cryptomorin.xseries.XMaterial;
-import com.craftaro.third_party.com.cryptomorin.xseries.XSound;
-import com.craftaro.third_party.org.apache.commons.text.WordUtils;
+import com.songoda.core.compatibility.CompatibleMaterial;
+import com.songoda.core.gui.Gui;
+import com.songoda.core.gui.GuiUtils;
+import com.songoda.third_party.com.cryptomorin.xseries.XMaterial;
+import com.songoda.third_party.com.cryptomorin.xseries.XSound;
+import com.songoda.third_party.org.apache.commons.text.WordUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.kit.Kit;
 import com.songoda.ultimatekits.kit.KitItem;

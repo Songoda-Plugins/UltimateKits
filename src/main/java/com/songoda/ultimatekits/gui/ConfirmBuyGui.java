@@ -1,10 +1,10 @@
 package com.songoda.ultimatekits.gui;
 
-import com.craftaro.core.gui.Gui;
-import com.craftaro.core.gui.GuiUtils;
-import com.craftaro.core.utils.NumberUtils;
-import com.craftaro.core.utils.TextUtils;
-import com.craftaro.third_party.com.cryptomorin.xseries.XMaterial;
+import com.songoda.core.gui.Gui;
+import com.songoda.core.gui.GuiUtils;
+import com.songoda.core.utils.NumberUtils;
+import com.songoda.core.utils.TextUtils;
+import com.songoda.third_party.com.cryptomorin.xseries.XMaterial;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.kit.Kit;
 import com.songoda.ultimatekits.settings.Settings;

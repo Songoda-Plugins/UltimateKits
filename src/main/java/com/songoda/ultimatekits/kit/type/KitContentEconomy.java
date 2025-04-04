@@ -1,8 +1,8 @@
 package com.songoda.ultimatekits.kit.type;
 
-import com.craftaro.core.chat.AdventureUtils;
-import com.craftaro.core.hooks.EconomyManager;
-import com.craftaro.core.utils.NumberUtils;
+import com.songoda.core.chat.AdventureUtils;
+import com.songoda.core.hooks.EconomyManager;
+import com.songoda.core.utils.NumberUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

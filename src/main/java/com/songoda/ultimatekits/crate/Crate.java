@@ -1,6 +1,6 @@
 package com.songoda.ultimatekits.crate;
 
-import com.craftaro.core.utils.TextUtils;
+import com.songoda.core.utils.TextUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.kit.Kit;
 import org.bukkit.ChatColor;

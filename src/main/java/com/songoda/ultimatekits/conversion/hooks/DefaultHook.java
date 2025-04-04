@@ -1,6 +1,6 @@
 package com.songoda.ultimatekits.conversion.hooks;
 
-import com.craftaro.core.compatibility.ServerVersion;
+import com.songoda.core.compatibility.ServerVersion;
 import com.songoda.ultimatekits.conversion.ConversionKit;
 import com.songoda.ultimatekits.conversion.Hook;
 import com.songoda.ultimatekits.utils.ItemSerializer;

@@ -1,6 +1,6 @@
 package com.songoda.ultimatekits.commands;
 
-import com.craftaro.core.commands.AbstractCommand;
+import com.songoda.core.commands.AbstractCommand;
 import com.songoda.ultimatekits.UltimateKits;
 import org.bukkit.command.CommandSender;
 
