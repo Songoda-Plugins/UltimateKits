@@ -1,6 +1,7 @@
 package com.songoda.ultimatekits.kit;
 
 import com.songoda.core.configuration.Config;
+import com.songoda.core.third_party.de.tr7zw.nbtapi.NBTItem;
 import com.songoda.core.utils.TextUtils;
 import com.songoda.ultimatekits.UltimateKits;
 import com.songoda.ultimatekits.category.Category;
@@ -63,6 +64,20 @@ public class Kit implements Cloneable {
         List<KitItem> list = new ArrayList<>();
         for (ItemStack is : items) {
             if (is != null && is.getType() != Material.AIR) {
+                // Check for NBT tags first, if present
+                NBTItem nbt = new NBTItem(is);
+                if (nbt.hasKey("kit-type")) {
+                    String type = nbt.getString("kit-type");
+                    if ("command".equals(type) && nbt.hasKey("kit-command")) {
+                        String command = nbt.getString("kit-command");
+                        list.add(new KitItem(is, "/" + command));
+                        continue;
+                    } else if ("economy".equals(type) && nbt.hasKey("kit-amount")) {
+                        double amount = nbt.getDouble("kit-amount");
+                        list.add(new KitItem(is, Settings.CURRENCY_SYMBOL.getString() + amount));
+                        continue;
+                    }
+                }
                 if (is.getItemMeta().hasLore()) {
                     ItemMeta meta = is.getItemMeta();
                     List<String> newLore = new ArrayList<>();

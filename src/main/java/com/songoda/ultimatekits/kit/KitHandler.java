@@ -274,18 +274,24 @@ public class KitHandler {
                     this.plugin.getGuiManager().showGUI(player, new AnimatedKitGui(this.plugin, player, kit, item));
                     return true;
                 } else {
-                    ItemStack parseStack = item.getContent().process(player);
-                    if (parseStack != null) {
-                        parseStack = parseStack.clone();
+                    // For normal inventory items
+                    if (item.getType() == KitItemType.ITEM) {
+                        ItemStack parseStack = item.getContent().process(player);
+                        if (parseStack != null) {
+                            parseStack = parseStack.clone();
 
-                        if (Settings.AUTO_EQUIP_ARMOR.getBoolean() && ArmorType.equip(player, parseStack)) {
-                            continue;
-                        }
+                            if (Settings.AUTO_EQUIP_ARMOR.getBoolean() && ArmorType.equip(player, parseStack)) {
+                                continue;
+                            }
 
-                        Map<Integer, ItemStack> overfilled = player.getInventory().addItem(parseStack);
-                        for (ItemStack item2 : overfilled.values()) {
-                            player.getWorld().dropItemNaturally(player.getLocation(), item2);
+                            Map<Integer, ItemStack> overfilled = player.getInventory().addItem(parseStack);
+                            for (ItemStack item2 : overfilled.values()) {
+                                player.getWorld().dropItemNaturally(player.getLocation(), item2);
+                            }
                         }
+                    } else {
+                        // For Command and Economy kit items
+                        item.getContent().process(player);
                     }
                 }
             }

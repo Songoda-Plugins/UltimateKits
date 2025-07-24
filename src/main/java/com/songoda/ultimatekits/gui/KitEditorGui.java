@@ -5,6 +5,7 @@ import com.songoda.core.gui.DoubleGui;
 import com.songoda.core.gui.Gui;
 import com.songoda.core.gui.GuiUtils;
 import com.songoda.core.input.ChatPrompt;
+import com.songoda.core.third_party.de.tr7zw.nbtapi.NBTItem;
 import com.songoda.core.utils.SkullItemCreator;
 import com.songoda.core.utils.TextUtils;
 import com.songoda.third_party.com.cryptomorin.xseries.XMaterial;
@@ -262,6 +263,12 @@ public class KitEditorGui extends DoubleGui {
                                 meta.setDisplayName(this.plugin.getLocale().getMessage("general.type.command").toText());
                                 parseStack.setItemMeta(meta);
 
+                                // AHandle Command kit items using NBT tags
+                                NBTItem nbt = new NBTItem(parseStack);
+                                nbt.setString("kit-type", "command");
+                                nbt.setString("kit-command", msg);
+                                parseStack = nbt.getItem();
+
                                 this.plugin.getLocale().newMessage(this.plugin.getLocale().getMessage("interface.kiteditor.addcommandok")
                                                 .processPlaceholder("command", msg).toText())
                                         .sendPrefixedMessage(this.player);
@@ -299,6 +306,16 @@ public class KitEditorGui extends DoubleGui {
                         meta.setLore(lore);
                         meta.setDisplayName(this.plugin.getLocale().getMessage("general.type.money").toText());
                         parseStack.setItemMeta(meta);
+
+                        // Handle Economy kit items using NBT tags
+                        NBTItem nbt = new NBTItem(parseStack);
+                        nbt.setString("kit-type", "economy");
+                        try {
+                            nbt.setDouble("kit-amount", Double.parseDouble(msg));
+                        } catch (NumberFormatException e) {
+                            plugin.getLogger().warning("UltimateKits: Could not parse economy amount");
+                        }
+                        parseStack = nbt.getItem();
 
                         this.plugin.getLocale().getMessage("interface.kiteditor.addeconomyok").processPlaceholder("amount", msg.trim())
                                 .sendPrefixedMessage(this.player);
